@@ -37,7 +37,7 @@ app.get("/api/users/:id/total", (req, res) => {
     return res.status(404).json({ error: `User ${id} not found` });
   }
 
-  const total = user.orders.reduce((sum, order) => sum + order.amount, 0);
+  const total = (user.orders || []).reduce((sum, order) => sum + order.amount, 0);
 
   res.json({ id: user.id, name: user.name, total });
 });
